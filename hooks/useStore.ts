@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useReducer } from 'react';
 import { StoreContext } from '../context/StoreContext';
 import { Category, Product } from '../utils/types';
 import { categories, products as productList } from '../utils/data';
@@ -8,7 +8,18 @@ export const useStore = () => {
         products,
         setProducts,
         currentCategory,
-        setCurrentCategory
+        setCurrentCategory,
+        shoppingCar: {
+            address,
+            amount,
+            client,
+            products: productsInCar,
+            emptyCar,
+            addProduct,
+            removeProduct,
+            setAddressCar,
+            setClientCar
+        }
     } = useContext(StoreContext);
 
     const totalProducts = products.length || 0;
@@ -21,11 +32,32 @@ export const useStore = () => {
         setProducts(productsFiltered);
     }
 
+
+    const currentProductsInCar = productsInCar;
+
+    const currentTotalProductsInCar = productsInCar.length;
+
+    const currentClientInCar = client;
+
+    const currentAddressInCar = address;
+
+    const currentAmountInCar = amount;
+
     return {
         changeCategory,
         totalProducts,
         currentCategory,
         categories,
-        products
+        products,
+        currentProductsInCar,
+        currentClientInCar,
+        currentAddressInCar,
+        currentAmountInCar,
+        currentTotalProductsInCar,
+        addProduct,
+        removeProduct,
+        emptyCar,
+        setAddressCar,
+        setClientCar,
     }
 }

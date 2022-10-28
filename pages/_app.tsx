@@ -2,16 +2,12 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import { ThemeColorEnum, ThemeContext, ThemeEnum } from "../context/ThemeContext";
 import { useState } from "react";
-import { StoreContext } from '../context/StoreContext';
-import { Category, Product } from '../utils/types';
+import StoreProvider from '../components/StoreProvider';
 
 function MyApp({Component, pageProps}: AppProps) {
     // ESTADOS PARA MI TEMA
     const [theme, setTheme] = useState<ThemeEnum>(ThemeEnum.DARK)
     const [color, setColor] = useState<ThemeColorEnum>(ThemeColorEnum.BLUE)
-    // ESTADOS PARA MI TIENDA
-    const [currentCategory, setCurrentCategory] = useState<Category>()
-    const [products, setProducts] = useState<Product[]>([])
 
 
     return (
@@ -21,14 +17,9 @@ function MyApp({Component, pageProps}: AppProps) {
             color,
             setColor
         }}>
-            <StoreContext.Provider value={{
-                currentCategory,
-                products,
-                setCurrentCategory,
-                setProducts
-            }}>
+            <StoreProvider>
                 <Component {...pageProps} />
-            </StoreContext.Provider>
+            </StoreProvider>
         </ThemeContext.Provider>
     )
 }
