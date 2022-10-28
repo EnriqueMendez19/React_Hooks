@@ -6,14 +6,13 @@ import ExampleUseContext from "../components/ExampleUseContext";
 
 const Home: NextPage = () => {
 
-
     return (
         <div>
             {/*<ExampleUseState/>*/}
 
             {/*<ExampleUseEffect/>*/}
 
-            <ExampleUseContext />
+            {/*<ExampleUseContext />*/}
         </div>
     )
 }
